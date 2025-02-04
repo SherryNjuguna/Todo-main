@@ -1,13 +1,12 @@
 <script setup>
 import { onMounted, computed, ref } from "vue";
 
-
 const api_key = "c73622a39f2d4383a72ce87dbb5cc01e";
 const weatherData = ref({});
 const isLoading = ref(false);
 const city_name = ref("Nairobi");
 const searchQuery = ref("");
-const searchedCityData = ref(null); 
+const searchedCityData = ref(null);
 let error = ref(null);
 const currentTime = ref("");
 const currentDate = ref("");
@@ -25,8 +24,7 @@ const getWeather = async (city) => {
 
     const data = await res.json();
     weatherData.value[city] = data;
-    searchedCityData.value = data; 
-
+    searchedCityData.value = data;
   } catch (err) {
     error.value = err.message;
     console.error("Fetching error:", err);
@@ -107,7 +105,9 @@ const weatherBackgrounds = {
 };
 
 const backgroundImage = computed(() => {
-  const weather = searchedCityData.value?.weather?.[0]?.main || weatherData.currentLocation?.weather?.[0]?.main;
+  const weather =
+    searchedCityData.value?.weather?.[0]?.main ||
+    weatherData.currentLocation?.weather?.[0]?.main;
   return weatherBackgrounds[weather] || weatherBackgrounds.Default;
 });
 
@@ -122,7 +122,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container image m-0 p-0" :style="{ backgroundImage: `url(${backgroundImage})` }">
+  <div
+    class="container image m-0 p-0"
+    :style="{ backgroundImage: `url(${backgroundImage})` }"
+  >
     <div class="row">
       <div class="col d-flex align-items-center">
         <div class="logo">
@@ -200,31 +203,29 @@ onMounted(async () => {
     <div class="row">
       <div class="col d-block">
         <div class="col">
-        <div class="search-bar mt-3 mb-3">
-          <form @submit="handleSearch" class="d-flex justify-content-center">
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Enter a city name"
-              class="form-control w-50 me-2"
-            />
-            <button type="submit" class="btn btn-primary">Search</button>
-          </form>
-          <div v-if="searchedCityData">
-      <p class="ms-5 fw-bold">
-        City: {{ searchedCityData.name }} <br />
-        Temp: {{ searchedCityData.main.temp.toFixed(1) }}&deg; <br />
-        Weather: {{ searchedCityData.weather[0].description }}
-      </p>
-    </div>   
+          <div class="search-bar mt-3 mb-3">
+            <form @submit="handleSearch" class="d-flex justify-content-center">
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Enter a city name"
+                class="form-control w-50 me-2"
+              />
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <div v-if="searchedCityData">
+              <p class="ms-5 fw-bold">
+                City: {{ searchedCityData.name }} <br />
+                Temp: {{ searchedCityData.main.temp.toFixed(1) }}&deg; <br />
+                Weather: {{ searchedCityData.weather[0].description }}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-        <div v-if="isLoading">Loading...</div>
-        <div v-else-if="error">Error: {{ error }}</div>
-        <div v-else></div>
+
         <div v-if="weatherData.currentLocation" class="firstsection">
           <p class="fw-bold ms-5" style="font-size: 5rem">
-            {{ searchedCityData.weather[0].main }} 
+            {{ searchedCityData.weather[0].main }}
           </p>
           <p class="fs-1 ms-5 fw-semibold">
             {{ searchedCityData.weather[0].description }}
@@ -283,13 +284,12 @@ onMounted(async () => {
         </div>
       </div>
 
-
       <div class="col d-block">
         <div class="topsection d-flex">
           <div class="icons d-inline">
             <div>
               <button class="btn-sm rounded-pill mb-2" style="margin-top: 4rem">
-                {{ searchedCityData?.coord?.lon  || "Loading..." }}W
+                {{ searchedCityData?.coord?.lon || "Loading..." }}W
               </button>
             </div>
             <button class="btn-sm rounded-pill">
@@ -299,9 +299,7 @@ onMounted(async () => {
 
           <div class="temperature d-flex">
             <p style="font-size: 10rem">
-              {{
-               searchedCityData?.main?.temp.toFixed(1) || "Loading..."
-              }}&deg;
+              {{ searchedCityData?.main?.temp.toFixed(1) || "Loading..." }}&deg;
             </p>
             <i
               class="fa-solid fa-plus-minus"
@@ -395,7 +393,6 @@ onMounted(async () => {
 </template>
 
 <style>
-
 .image {
   background-image: url("@/assets/cloud1.jpeg");
   background-repeat: no-repeat;
