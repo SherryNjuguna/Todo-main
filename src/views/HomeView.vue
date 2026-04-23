@@ -84,6 +84,7 @@ const updateTimeAndDate = () => {
   currentTime.value = now.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
+    hour12: true,
   });
   currentDate.value = now.toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -91,6 +92,7 @@ const updateTimeAndDate = () => {
     year: "numeric",
   });
 };
+
 
 import sunny from "@/assets/sunny.jpg";
 import cloud from "@/assets/cloud4.jpg";
@@ -175,7 +177,7 @@ onMounted(async () => {
         <div class="greet ms-3">
           <h6 class="me-2 ms-5 pt-2">
             Hey 👋 <br />
-            Rosemary
+            Welcome
           </h6>
         </div>
 
