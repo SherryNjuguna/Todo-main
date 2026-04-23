@@ -139,7 +139,7 @@ onMounted(async () => {
           />
         </div>
         <div>
-          <p class="text-dark fw-semibold me-5 pe-4 pt-2">Weather Forecast</p>
+          <p class="text-dark fw-semibold me-5 pe-4 pt-2">Sherry Wethacast</p>
         </div>
         <div class="navbar pt-3">
           <ul class="d-flex align-items-center list-unstyled">
